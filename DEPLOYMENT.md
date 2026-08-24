@@ -2,6 +2,12 @@
 
 This repository deploys automatically to `/opt/ScrumPraxisProjekt` when changes are pushed to `main`.
 
+The website is served at:
+
+```text
+https://scrum.zvendson.com
+```
+
 ## GitHub Actions secrets
 
 Create these repository secrets in GitHub:
@@ -29,7 +35,15 @@ The deploy script:
 1. Fetches `origin/main`.
 2. Resets `/opt/ScrumPraxisProjekt` to `origin/main`.
 3. Runs `npm ci` or `npm install` and `npm run build` when `package.json` exists.
-4. Tests and reloads nginx.
+4. Publishes the website to `/var/www/scrumpraxis`.
+5. Tests and reloads nginx.
+
+Publishing source priority:
+
+1. `dist/` when a build produced it.
+2. `public/` when it exists.
+3. Root `index.html` when it exists.
+4. A small placeholder page when no website files exist yet.
 
 The existing nginx site is not changed by this repository setup.
 
@@ -43,6 +57,7 @@ The Linux deploy user is `scrumpraxis`. It owns `/opt/ScrumPraxisProjekt` and ma
 ## Nginx
 
 Add a separate nginx server block for this project once the domain or subdomain is known.
+The active server block is `/etc/nginx/sites-available/scrumpraxis` and serves `/var/www/scrumpraxis`.
 
 For a static HTML site:
 
