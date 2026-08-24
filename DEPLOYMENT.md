@@ -7,7 +7,7 @@ This repository deploys automatically to `/opt/ScrumPraxisProjekt` when changes 
 Create these repository secrets in GitHub:
 
 - `SSH_HOST`: server IP address or DNS name
-- `SSH_USER`: `root`
+- `SSH_USER`: `scrumpraxis`
 - `SSH_KEY`: private key from `/root/.ssh/github-actions-scrum-praxis-projekt`
 
 Show the private key on the server with:
@@ -32,6 +32,13 @@ The deploy script:
 4. Tests and reloads nginx.
 
 The existing nginx site is not changed by this repository setup.
+
+The Linux deploy user is `scrumpraxis`. It owns `/opt/ScrumPraxisProjekt` and may only run these commands through passwordless sudo:
+
+```bash
+/usr/sbin/nginx -t
+/usr/bin/systemctl reload nginx
+```
 
 ## Nginx
 

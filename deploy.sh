@@ -19,5 +19,5 @@ if [[ -f package.json ]]; then
   npm run build
 fi
 
-nginx -t
-systemctl reload nginx
+sudo /usr/sbin/nginx -t
+sudo /usr/bin/systemctl reload nginx
