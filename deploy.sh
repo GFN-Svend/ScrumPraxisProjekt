@@ -4,6 +4,9 @@ set -euo pipefail
 REPO_DIR="/opt/ScrumPraxisProjekt"
 BRANCH="main"
 
+sudo /usr/bin/chown -R scrumpraxis:scrumpraxis "$REPO_DIR"
+sudo /usr/bin/chmod -R u+rwX "$REPO_DIR"
+
 cd "$REPO_DIR"
 
 git fetch origin "$BRANCH"
