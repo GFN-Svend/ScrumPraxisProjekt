@@ -185,73 +185,73 @@
           class="bilder"
         />
       </section>
+
       <section id="anfahrt">
         <h2 class="section-title">Öffnungszeiten & Anfahrt</h2>
 
-        <!-- Öffnungszeiten als Info-Badge -->
         <div class="opening-hours-card">
           <span class="hours-label">Öffnungszeiten:</span>
           <span class="hours-time">Montag – Freitag: 08:00 – 16:00 Uhr</span>
         </div>
 
-        <div class="anfahrt-content">
-          <div class="anfahrt-img-wrapper">
-            <img
-              src="{{ url_for('static', filename='img/google-earth-pro-ab-sofort-kostenlos-haben-152503.webp') }}"
-              alt="Google Maps"
-              class="anfahrt-img"
-            />
+        <div class="anfahrt-wrapper">
+          <!-- Bild wird mit float eingebunden -->
+          <img
+            src="{{ url_for('static', filename='img/google-earth-pro-ab-sofort-kostenlos-haben-152503.webp') }}"
+            alt="Google Maps"
+            class="anfahrt-img-float"
+          />
+
+          <h3>Anfahrtsbeschreibung zur Stadtverwaltung Musterstadt</h3>
+          <p class="address">
+            <strong>Adresse:</strong> Musterstraße 420, 04109 Musterstadt
+          </p>
+
+          <div class="route-group">
+            <h4>Mit dem Auto:</h4>
+            <ul>
+              <li>
+                Fahre auf die Autobahn <strong>A1</strong> in Richtung
+                Musterstadt.
+              </li>
+              <li>
+                Nimm die Ausfahrt <strong>42-Musterstadt-Zentrum</strong> und
+                folge der Beschilderung Richtung <em>Stadtmitte</em>.
+              </li>
+              <li>
+                Biege nach ca. 2 km an der Ampelkreuzung links in die
+                <strong>Musterstraße</strong> ein.
+              </li>
+              <li>
+                Das Ziel befindet sich nach 300 Metern auf der rechten Seite
+                (Parkplätze stehen hinter dem Gebäude zur Verfügung).
+              </li>
+            </ul>
           </div>
 
-          <div class="anfahrt-text">
-            <h3>Anfahrtsbeschreibung zur Stadtverwaltung Musterstadt</h3>
-            <p class="address">
-              <strong>Adresse:</strong> Musterstraße 420, 04109 Musterstadt
-            </p>
-
-            <div class="route-group">
-              <h4>Mit dem Auto:</h4>
-              <ul>
-                <li>
-                  Fahre auf die Autobahn <strong>A1</strong> in Richtung
-                  Musterstadt.
-                </li>
-                <li>
-                  Nimm die Ausfahrt <strong>42-Musterstadt-Zentrum</strong> und
-                  folge der Beschilderung Richtung <em>Stadtmitte</em>.
-                </li>
-                <li>
-                  Biege nach ca. 2 km an der Ampelkreuzung links in die
-                  <strong>Musterstraße</strong> ein.
-                </li>
-                <li>
-                  Das Ziel befindet sich nach 300 Metern auf der rechten Seite
-                  (Parkplätze stehen hinter dem Gebäude zur Verfügung).
-                </li>
-              </ul>
-            </div>
-
-            <div class="route-group">
-              <h4>Mit öffentlichen Verkehrsmitteln:</h4>
-              <ul>
-                <li>
-                  Nimm vom Hauptbahnhof Musterstadt die Tram-Linie
-                  <strong>3</strong> (Richtung <em>Sonnenberg</em>).
-                </li>
-                <li>
-                  Steige an der Haltestelle <strong>Musterplatz</strong> aus.
-                </li>
-                <li>
-                  Gehe in Fahrtrichtung ca. 100 Meter geradeaus und biege rechts
-                  in die Musterstraße ein.
-                </li>
-                <li>
-                  Nach etwa 2 Minuten Fußweg erreichst du den Eingang auf der
-                  rechten Seite.
-                </li>
-              </ul>
-            </div>
+          <div class="route-group">
+            <h4>Mit öffentlichen Verkehrsmitteln:</h4>
+            <ul>
+              <li>
+                Nimm vom Hauptbahnhof Musterstadt die Tram-Linie
+                <strong>3</strong> (Richtung <em>Sonnenberg</em>).
+              </li>
+              <li>
+                Steige an der Haltestelle <strong>Musterplatz</strong> aus.
+              </li>
+              <li>
+                Gehe in Fahrtrichtung ca. 100 Meter geradeaus und biege rechts
+                in die Musterstraße ein.
+              </li>
+              <li>
+                Nach etwa 2 Minuten Fußweg erreichst du den Eingang auf der
+                rechten Seite.
+              </li>
+            </ul>
           </div>
+
+          <!-- Verhindert Layout-Fehler nach dem Text -->
+          <div style="clear: both"></div>
         </div>
       </section>
       <div>
