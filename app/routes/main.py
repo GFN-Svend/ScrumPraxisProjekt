@@ -11,6 +11,16 @@ def index():
     return render_template("index.html")
 
 
+@blueprint.get("/impressum")
+def impressum():
+    return render_template("impressum.html")
+
+
+@blueprint.get("/datenschutz")
+def datenschutz():
+    return render_template("datenschutz.html")
+
+
 @blueprint.get("/health")
 def health():
     database = get_database()
