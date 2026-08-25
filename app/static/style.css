@@ -372,41 +372,145 @@ footer nav a:hover {
   font-size: 0.95rem;
 }
 
+Du kannst das Layout so anpassen, dass der Text das Bild sauber umfließt (**Bild oben links, Text daneben und darunter**). Das geht am einfachsten, wenn du die Flexbox-Struktur entfernst und stattdessen `float: left` für das Bild nutzt.
+
+Hier sind die passenden Code-Anpassungen:
+
+### 1. HTML (`templates/index.html`)
+
+Bette das Bild direkt in den Textbereich ein, damit der Fließtext um das Bild herumwandern kann:
+
+```html
+<section id="anfahrt">
+    <h2 class="section-title">Öffnungszeiten & Anfahrt</h2>
+    
+    <div class="opening-hours-card">
+        <span class="hours-label">Öffnungszeiten:</span>
+        <span class="hours-time">Montag – Freitag: 08:00 – 16:00 Uhr</span>
+    </div>
+
+    <div class="anfahrt-wrapper">
+        <!-- Bild wird mit float eingebunden -->
+        <img src="{{ url_for('static', filename='img/google-earth-pro-ab-sofort-kostenlos-haben-152503.webp') }}" 
+             alt="Google Maps" 
+             class="anfahrt-img-float">
+
+        <h3>Anfahrtsbeschreibung zur Stadtverwaltung Musterstadt</h3>
+        <p class="address"><strong>Adresse:</strong> Musterstraße 420, 04109 Musterstadt</p>
+
+        <div class="route-group">
+            <h4>Mit dem Auto:</h4>
+            <ul>
+                <li>Fahre auf die Autobahn <strong>A1</strong> in Richtung Musterstadt.</li>
+                <li>Nimm die Ausfahrt <strong>42-Musterstadt-Zentrum</strong> und folge der Beschilderung Richtung <em>Stadtmitte</em>.</li>
+                <li>Biege nach ca. 2 km an der Ampelkreuzung links in die <strong>Musterstraße</strong> ein.</li>
+                <li>Das Ziel befindet sich nach 300 Metern auf der rechten Seite (Parkplätze stehen hinter dem Gebäude zur Verfügung).</li>
+            </ul>
+        </div>
+
+        <div class="route-group">
+            <h4>Mit öffentlichen Verkehrsmitteln:</h4>
+            <ul>
+                <li>Nimm vom Hauptbahnhof Musterstadt die Tram-Linie <strong>3</strong> (Richtung <em>Sonnenberg</em>).</li>
+                <li>Steige an der Haltestelle <strong>Musterplatz</strong> aus.</li>
+                <li>Gehe in Fahrtrichtung ca. 100 Meter geradeaus und biege rechts in die Musterstraße ein.</li>
+                <li>Nach etwa 2 Minuten Fußweg erreichst du den Eingang auf der rechten Seite.</li>
+            </ul>
+        </div>
+        
+        <!-- Verhindert Layout-Fehler nach dem Text -->
+        <div style="clear: both;"></div>
+    </div>
+</section>
+
+```
+
+---
+
+### 2. CSS (`static/style.css`)
+
+Ersetze die Flexbox-Regeln für das Anfahrts-Content-Segment durch folgende `float`-Regel:
+
+```css
 #anfahrt {
-  background-color: #faf5ff;
-  border-left: 5px solid #805ad5;
-  border-radius: 8px;
-  padding: 24px;
-  margin-bottom: 20px;
+    background-color: #ffffff;
+    border-left: 5px solid #6b46c1;
+    border-radius: 12px;
+    padding: 28px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    margin-bottom: 24px;
+    font-family: system-ui, -apple-system, sans-serif;
+    color: #2d3748;
 }
 
-/* Bild und Text nebeneinander oder sauber untereinander platzieren */
-.anfahrt-content {
-  display: flex;
-  gap: 20px;
-  margin-top: 15px;
-  align-items: flex-start;
+.section-title {
+    color: #4c51bf;
+    margin-top: 0;
+    margin-bottom: 16px;
+    font-size: 1.5rem;
 }
 
-.anfahrt-img {
-  max-width: 300px;
-  width: 100%;
-  height: auto;
-  border-radius: 6px;
-  object-fit: cover;
+.opening-hours-card {
+    background-color: #f3e8ff;
+    border: 1px solid #e9d5ff;
+    padding: 10px 16px;
+    border-radius: 8px;
+    display: inline-flex;
+    gap: 8px;
+    align-items: center;
+    margin-bottom: 20px;
+    font-size: 0.95rem;
 }
 
-.anfahrt-text {
-  flex: 1;
+.hours-label {
+    font-weight: 700;
+    color: #5b21b6;
 }
 
-.anfahrt-text ul {
-  margin-top: 5px;
-  margin-bottom: 15px;
-  padding-left: 20px;
+/* Bild schwebend links ausrichten, Text fließt rechts und darunter weiter */
+.anfahrt-img-float {
+    float: left;
+    width: 260px;
+    height: auto;
+    margin-right: 20px;
+    margin-bottom: 15px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    object-fit: cover;
 }
 
-.anfahrt-text li {
-  margin-bottom: 5px;
-  line-height: 1.5;
+.anfahrt-wrapper h3 {
+    margin-top: 0;
+    margin-bottom: 6px;
+    font-size: 1.2rem;
+    color: #1a202c;
 }
+
+.address {
+    margin-top: 0;
+    margin-bottom: 16px;
+    color: #4a5568;
+}
+
+.route-group {
+    margin-bottom: 16px;
+}
+
+.route-group h4 {
+    margin-bottom: 6px;
+    font-size: 1rem;
+    color: #2b6cb0;
+}
+
+.anfahrt-wrapper ul {
+    margin: 0;
+    padding-left: 20px;
+}
+
+.anfahrt-wrapper li {
+    margin-bottom: 6px;
+    line-height: 1.5;
+    color: #4a5568;
+}
+
+```
