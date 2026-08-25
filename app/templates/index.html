@@ -31,14 +31,20 @@
           <!-- Die Bilder -->
           <div class="slides">
             <div class="slide slide-1">
-              <img src="img/kitten-1075168_1280.jpg" alt="Katzenbild 1" />
+              <img
+                src="{{ url_for('static', filename='img/kitten-1075168_1280.jpg') }}"
+                alt="Katzenbild 1"
+              />
             </div>
             <div class="slide slide-2">
-              <img src="img/muschel3.jpg" alt="Muscheln" />
+              <img
+                src="{{ url_for('static', filename='img/muschel3.jpg') }}"
+                alt="Muscheln"
+              />
             </div>
             <div class="slide slide-3">
               <img
-                src="img/rathaus-f8cb33e8-d268-4daf-98c9-4cddfe1913a6.jpg"
+                src="{{ url_for('static', filename='img/rathaus-f8cb33e8-d268-4daf-98c9-4cddfe1913a6.jpg') }}"
                 alt="Rathaus"
               />
             </div>
@@ -67,21 +73,33 @@
 
         <div class="news-grid">
           <article class="news-card">
-            <img src="img/muscheln1.jpg" alt="Muscheln 1" class="news-bilder" />
+            <img
+              src="{{ url_for('static', filename='img/muscheln1.jpg') }}"
+              alt="Muscheln 1"
+              class="news-bilder"
+            />
             <div class="news-content">
               <h4>Neues Stadtmuseum eröffnet</h4>
               <p>Das neue Stadtmuseum eröffnet am ... wo ????</p>
             </div>
           </article>
           <article class="news-card">
-            <img src="img/musche2.jpg" alt="Muscheln 2" class="news-bilder" />
+            <img
+              src="{{ url_for('static', filename='img/muschel3.jpg') }}"
+              alt="Muscheln 2"
+            />
+
             <div class="news-content">
               <h4>Neues Straßenbahnnetzwerk wurde errichtet</h4>
               <p>Eine komplett neue Straße ist einfach so aufgetaucht</p>
             </div>
           </article>
           <article class="news-card">
-            <img src="img/muschel3.jpg" alt="Muscheln 3" class="news-bilder" />
+            <img
+              src="{{ url_for('static', filename='img/muschel3.jpg') }}"
+              alt="Muscheln 3"
+              class="news-bilder"
+            />
             <div class="news-content">
               <h4>Auto in Brand</h4>
               <p>Ich habe mein Auto angezündet</p>
@@ -108,7 +126,7 @@
         </div>
 
         <img
-          src="img/rathaus-f8cb33e8-d268-4daf-98c9-4cddfe1913a6.jpg"
+          src="{{ url_for('static', filename='img/rathaus-f8cb33e8-d268-4daf-98c9-4cddfe1913a6.jpg') }}"
           alt="Rathaus"
           class="bilder"
         />
@@ -150,7 +168,7 @@
         </div>
 
         <img
-          src="img/kittens-3535404_1280.jpg"
+          src="{{ url_for('static', filename='img/kittens-3535404_1280.jpg') }}"
           alt="Katzenbild 4"
           class="bilder"
         />
@@ -160,7 +178,7 @@
         <h3>Öffnungszeiten & Anfahrt</h3>
         <p>Montag - Freitag: 08:00 - 16:00 Uhr</p>
         <img
-          src="img/pexels-vatius-127028.jpg"
+          src="{{ url_for('static', filename='img/pexels-vatius-127028.jpg') }}"
           alt="Katzenbild 3"
           class="bilder"
         />
@@ -170,7 +188,7 @@
   <footer>
     <nav>
       <ul>
-        <li><a href="impressum.html">Impressum</a></li>
+        <li><a href="impressum">Impressum</a></li>
         <li><a href="datenschutz.html">Datenschutzrichtlinien</a></li>
       </ul>
     </nav>
