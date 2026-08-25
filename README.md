@@ -54,11 +54,11 @@ ausschließlich über `get_database()` auf die Datenbank zu.
 python -m unittest discover -s tests
 ```
 
-## Automatischer Test-Workflow
+## Automatischer CI/CD-Workflow
 
-Der GitHub-Actions-Workflow `.github/workflows/tests.yml` läuft bei jedem Push,
-bei jedem Pull Request und bei manueller Ausführung. Er prüft die Anwendung mit
-Python 3.10 und 3.14 nach folgenden Kriterien:
+Der GitHub-Actions-Workflow `.github/workflows/tests.yml` läuft bei jedem Push
+auf `main`, bei jedem Pull Request nach `main` und bei manueller Ausführung. Er
+prüft die Anwendung mit Python 3.10 und 3.14 nach folgenden Kriterien:
 
 - Alle Abhängigkeiten aus `requirements.txt` lassen sich installieren.
 - Alle Python-Dateien lassen sich ohne Syntaxfehler kompilieren.
@@ -67,4 +67,10 @@ Python 3.10 und 3.14 nach folgenden Kriterien:
 Schlägt eines der Kriterien fehl, wird der Workflow rot markiert. Damit ein
 fehlerhafter Pull Request nicht nach `main` übernommen werden kann, sollte in
 GitHub zusätzlich eine Branch-Protection-Regel für `main` aktiviert und der
-Statuscheck `Python 3.10` als verpflichtend ausgewählt werden.
+Statuscheck `Python 3.10` sowie `Python 3.14` als verpflichtend ausgewählt
+werden.
+
+Nach einem Push auf `main` wird das Produktivsystem nur aktualisiert, wenn beide
+Python-Testläufe erfolgreich waren. Pull Requests und manuell gestartete Läufe
+führen kein Deployment aus. Das Deployment verwendet das GitHub-Environment
+`production` und die Repository-Secrets `SSH_HOST`, `SSH_USER` und `SSH_KEY`.
