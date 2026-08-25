@@ -1,21 +1,178 @@
 <!doctype html>
 <html lang="de">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Team 3 - Scrum Projekt</title>
-  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-</head>
-<body>
-  <main class="page">
-    <section class="panel">
-      <p class="eyebrow">Bürgerportal · Team 3</p>
-      <h1>Willkommen im Bürgerportal</h1>
-      <p class="lead">
-        Hier können Anliegen aus der Gemeinde künftig einfach erfasst,
-        strukturiert bearbeitet und transparent nachverfolgt werden.
-      </p>
-    </section>
-  </main>
-</body>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Team 3 - Scrum Projekt</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='style.css') }}"
+    />
+  </head>
+  <body>
+    <main class="page">
+      <section class="panel">
+        <p class="eyebrow">Bürgerportal · Team 3</p>
+        <h1>Willkommen im Bürgerportal</h1>
+        <p class="lead">
+          Hier können Anliegen aus der Gemeinde künftig einfach erfasst,
+          strukturiert bearbeitet und transparent nachverfolgt werden.
+        </p>
+      </section>
+      <section id="home">
+        <h2>Hauptseite</h2>
+        <p>Willkommen auf der Hauptseite des Bürgerportals.</p>
+
+        <div class="css-carousel">
+          <input type="radio" name="slides" id="slide-1" checked />
+          <input type="radio" name="slides" id="slide-2" />
+          <input type="radio" name="slides" id="slide-3" />
+
+          <!-- Die Bilder -->
+          <div class="slides">
+            <div class="slide slide-1">
+              <img src="img/kitten-1075168_1280.jpg" alt="Katzenbild 1" />
+            </div>
+            <div class="slide slide-2">
+              <img src="img/muschel3.jpg" alt="Muscheln" />
+            </div>
+            <div class="slide slide-3">
+              <img
+                src="img/rathaus-f8cb33e8-d268-4daf-98c9-4cddfe1913a6.jpg"
+                alt="Rathaus"
+              />
+            </div>
+          </div>
+
+          <div class="nav-controls">
+            <div class="controls control-1">
+              <label for="slide-3" class="prev">&#10094;</label>
+              <label for="slide-2" class="next">&#10095;</label>
+            </div>
+            <div class="controls control-2">
+              <label for="slide-1" class="prev">&#10094;</label>
+              <label for="slide-3" class="next">&#10095;</label>
+            </div>
+            <div class="controls control-3">
+              <label for="slide-2" class="prev">&#10094;</label>
+              <label for="slide-1" class="next">&#10095;</label>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="aktuelles">
+        <h3>Aktuelles</h3>
+        <p>Was gerade in deiner Stadt passiert</p>
+
+        <div class="news-grid">
+          <article class="news-card">
+            <img src="img/muscheln1.jpg" alt="Muscheln 1" class="news-bilder" />
+            <div class="news-content">
+              <h4>Neues Stadtmuseum eröffnet</h4>
+              <p>Das neue Stadtmuseum eröffnet am ... wo ????</p>
+            </div>
+          </article>
+          <article class="news-card">
+            <img src="img/musche2.jpg" alt="Muscheln 2" class="news-bilder" />
+            <div class="news-content">
+              <h4>Neues Straßenbahnnetzwerk wurde errichtet</h4>
+              <p>Eine komplett neue Straße ist einfach so aufgetaucht</p>
+            </div>
+          </article>
+          <article class="news-card">
+            <img src="img/muschel3.jpg" alt="Muscheln 3" class="news-bilder" />
+            <div class="news-content">
+              <h4>Auto in Brand</h4>
+              <p>Ich habe mein Auto angezündet</p>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section id="kontakt">
+        <div>
+          <h3>Kontaktdaten der Verwaltung</h3>
+
+          <address>
+            <strong>Stadtverwaltung Musterstadt</strong><br />
+            Rathausplatz 1<br />
+            04109 Musterstadt<br />
+            <strong>Telefon:</strong
+            ><a href="tel:+493411234560">+49 341 123456-0</a><br />
+            <strong>E-Mail:</strong
+            ><a href="mail:service@musterstadt.example"
+              >service@musterstadt.example</a
+            >
+          </address>
+        </div>
+
+        <img
+          src="img/rathaus-f8cb33e8-d268-4daf-98c9-4cddfe1913a6.jpg"
+          alt="Rathaus"
+          class="bilder"
+        />
+      </section>
+
+      <section id="support">
+        <h3>Support & FAQ</h3>
+        <p>Häufig gestellte Fragen und Hilfestellungen für Bürger.</p>
+        <div class="faq-container">
+          <details class="faq-item">
+            <summary>Wie beantrage ich einen neuen Personalausweis?</summary>
+            <div>
+              <p>
+                Sie können online einen Termin im Bürgerbüro vereinbaren.
+                Bringen Sie zum Termin Ihr altes Ausweisdokument sowie ein
+                aktuelles biometrisches Passfoto mit
+              </p>
+            </div>
+          </details>
+          <details class="faq-item">
+            <summary>Wie melde ich meinen Wohnsitz um?</summary>
+            <div>
+              <p>
+                Die Ummeldung muss innerhalb von zwei Wochen nach dem Einzug
+                erfolgen. Benötigt werden die Wohnungsgeberbestätigung und Ihr
+                Ausweisdokument.
+              </p>
+            </div>
+          </details>
+          <details class="faq-item">
+            <summary>Wo finde ich Informationen zu Müllabfuhrterminen?</summary>
+            <div>
+              <p>
+                Die aktuellen Abfuhrtermine für Ihren Stadtteil finden Sie im
+                Abfallkalender auf unserer Website oder in der Bürger-App.
+              </p>
+            </div>
+          </details>
+        </div>
+
+        <img
+          src="img/kittens-3535404_1280.jpg"
+          alt="Katzenbild 4"
+          class="bilder"
+        />
+      </section>
+
+      <section id="anfahrt">
+        <h3>Öffnungszeiten & Anfahrt</h3>
+        <p>Montag - Freitag: 08:00 - 16:00 Uhr</p>
+        <img
+          src="img/pexels-vatius-127028.jpg"
+          alt="Katzenbild 3"
+          class="bilder"
+        />
+      </section>
+    </main>
+  </body>
+  <footer>
+    <nav>
+      <ul>
+        <li><a href="impressum.html">Impressum</a></li>
+        <li><a href="datenschutz.html">Datenschutzrichtlinien</a></li>
+      </ul>
+    </nav>
+  </footer>
 </html>
