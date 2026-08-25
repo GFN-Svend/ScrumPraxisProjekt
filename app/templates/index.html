@@ -9,11 +9,23 @@
       href="{{ url_for('static', filename='style.css') }}"
     />
   </head>
+  <header>
+    <h1>Willkommen im Bürgerportal</h1>
+    <div>
+      <nav>
+        <ul>
+          <li><a href="#home">Home</a></li>
+          <li><a href="#support">Support & FAQ</a></li>
+          <li><a href="#kontakt">Kontakt</a></li>
+          <li><a href="#anfahrt">Öffnungszeiten & Anfahrt</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
   <body>
     <main class="page">
       <section class="panel">
         <p class="eyebrow">Bürgerportal · Team 3</p>
-        <h1>Willkommen im Bürgerportal</h1>
         <p class="lead">
           Hier können Anliegen aus der Gemeinde künftig einfach erfasst,
           strukturiert bearbeitet und transparent nachverfolgt werden.
@@ -175,13 +187,26 @@
       </section>
 
       <section id="anfahrt">
-        <h3>Öffnungszeiten & Anfahrt</h3>
-        <p>Montag - Freitag: 08:00 - 16:00 Uhr</p>
-        <img
-          src="{{ url_for('static', filename='img/pexels-vatius-127028.jpg') }}"
-          alt="Katzenbild 3"
-          class="bilder"
-        />
+        <div></div>
+          <h3>Öffnungszeiten & Anfahrt</h3>
+          <p>Montag - Freitag: 08:00 - 16:00 Uhr</p>
+        </div>
+        <div>
+          <div>
+            <img src="{{ url_for('static', filename='img/google-earth-pro-ab-sofort-kostenlos-haben-152503.jpg')}}"
+            alt="Google-Maps"
+            class="bilder"
+            >
+          </div>
+           <div>
+          <img
+            src="{{ url_for('static', filename='img/pexels-vatius-127028.jpg') }}"
+            alt="Katzenbild 3"
+            class="bilder"
+          />
+        </div>
+        </div>
+       
       </section>
     </main>
   </body>
