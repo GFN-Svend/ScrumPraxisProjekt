@@ -119,7 +119,7 @@
             <strong>Telefon:</strong
             ><a href="tel:+493411234560">+49 341 123456-0</a><br />
             <strong>E-Mail:</strong
-            ><a href="mail:service@musterstadt.example"
+            ><a href="mailto:service@musterstadt.example"
               >service@musterstadt.example</a
             >
           </address>
@@ -188,8 +188,12 @@
   <footer>
     <nav>
       <ul>
-        <li><a href="impressum">Impressum</a></li>
-        <li><a href="datenschutz.html">Datenschutzrichtlinien</a></li>
+        <li><a href="{{ url_for('main.impressum') }}">Impressum</a></li>
+        <li>
+          <a href="{{ url_for('main.datenschutz') }}"
+            >Datenschutzrichtlinien</a
+          >
+        </li>
       </ul>
     </nav>
   </footer>

@@ -53,3 +53,18 @@ ausschließlich über `get_database()` auf die Datenbank zu.
 ```powershell
 python -m unittest discover -s tests
 ```
+
+## Automatischer Test-Workflow
+
+Der GitHub-Actions-Workflow `.github/workflows/tests.yml` läuft bei jedem Push,
+bei jedem Pull Request und bei manueller Ausführung. Er prüft die Anwendung mit
+Python 3.10 und 3.14 nach folgenden Kriterien:
+
+- Alle Abhängigkeiten aus `requirements.txt` lassen sich installieren.
+- Alle Python-Dateien lassen sich ohne Syntaxfehler kompilieren.
+- Alle automatisierten Tests unter `tests/` sind erfolgreich.
+
+Schlägt eines der Kriterien fehl, wird der Workflow rot markiert. Damit ein
+fehlerhafter Pull Request nicht nach `main` übernommen werden kann, sollte in
+GitHub zusätzlich eine Branch-Protection-Regel für `main` aktiviert und der
+Statuscheck `Python 3.10` als verpflichtend ausgewählt werden.
