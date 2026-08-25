@@ -185,46 +185,82 @@
           class="bilder"
         />
       </section>
-
       <section id="anfahrt">
-        <div></div>
-          <h3>Öffnungszeiten & Anfahrt</h3>
-          <p>Montag - Freitag: 08:00 - 16:00 Uhr</p>
+        <h2 class="section-title">Öffnungszeiten & Anfahrt</h2>
+
+        <!-- Öffnungszeiten als Info-Badge -->
+        <div class="opening-hours-card">
+          <span class="hours-label">Öffnungszeiten:</span>
+          <span class="hours-time">Montag – Freitag: 08:00 – 16:00 Uhr</span>
         </div>
-        <div>
-          <div>
-            <img src="{{ url_for('static', filename='img/google-earth-pro-ab-sofort-kostenlos-haben-152503.webp')}}"
-            alt="Google-Maps"
-            class="bilder"
-            >
+
+        <div class="anfahrt-content">
+          <div class="anfahrt-img-wrapper">
+            <img
+              src="{{ url_for('static', filename='img/google-earth-pro-ab-sofort-kostenlos-haben-152503.webp') }}"
+              alt="Google Maps"
+              class="anfahrt-img"
+            />
           </div>
-           <div>
-          <p>**Anfahrtsbeschreibung zum Haus Sonnenschein**
 
-            **Adresse:** Musterstraße 42, 12345 Musterstadt
+          <div class="anfahrt-text">
+            <h3>Anfahrtsbeschreibung zur Stadtverwaltung Musterstadt</h3>
+            <p class="address">
+              <strong>Adresse:</strong> Musterstraße 420, 04109 Musterstadt
+            </p>
 
-            * **Mit dem Auto:**
-            * Fahre auf die Autobahn **A1** in Richtung Musterstadt.
-            * Nimm die Ausfahrt **42-Musterstadt-Zentrum** und folge der Beschilderung Richtung *Stadtmitte*.
-            * Biege nach ca. 2 km an der Ampelkreuzung links in die **Musterstraße** ein.
-            * Das Ziel befindet sich nach 300 Metern auf der rechten Seite (Parkplätze stehen hinter dem Gebäude zur Verfügung).
+            <div class="route-group">
+              <h4>Mit dem Auto:</h4>
+              <ul>
+                <li>
+                  Fahre auf die Autobahn <strong>A1</strong> in Richtung
+                  Musterstadt.
+                </li>
+                <li>
+                  Nimm die Ausfahrt <strong>42-Musterstadt-Zentrum</strong> und
+                  folge der Beschilderung Richtung <em>Stadtmitte</em>.
+                </li>
+                <li>
+                  Biege nach ca. 2 km an der Ampelkreuzung links in die
+                  <strong>Musterstraße</strong> ein.
+                </li>
+                <li>
+                  Das Ziel befindet sich nach 300 Metern auf der rechten Seite
+                  (Parkplätze stehen hinter dem Gebäude zur Verfügung).
+                </li>
+              </ul>
+            </div>
 
-
-            * **Mit öffentlichen Verkehrsmitteln:**
-            * Nimm vom Hauptbahnhof Musterstadt die Tram-Linie **3** (Richtung *Sonnenberg*).
-            * Steige an der Haltestelle **Musterplatz** aus.
-            * Gehe in Fahrtrichtung ca. 100 Meter geradeaus und biege rechts in die Musterstraße ein.
-            * Nach etwa 2 Minuten Fußweg erreichst du den Eingang auf der rechten Seite.
-          </p>
+            <div class="route-group">
+              <h4>Mit öffentlichen Verkehrsmitteln:</h4>
+              <ul>
+                <li>
+                  Nimm vom Hauptbahnhof Musterstadt die Tram-Linie
+                  <strong>3</strong> (Richtung <em>Sonnenberg</em>).
+                </li>
+                <li>
+                  Steige an der Haltestelle <strong>Musterplatz</strong> aus.
+                </li>
+                <li>
+                  Gehe in Fahrtrichtung ca. 100 Meter geradeaus und biege rechts
+                  in die Musterstraße ein.
+                </li>
+                <li>
+                  Nach etwa 2 Minuten Fußweg erreichst du den Eingang auf der
+                  rechten Seite.
+                </li>
+              </ul>
+            </div>
+          </div>
         </div>
-        </div>
-        <div><img
-            src="{{ url_for('static', filename='img/pexels-vatius-127028.jpg') }}"
-            alt="Katzenbild 3"
-            class="bilder"
-          /></div>
-       
       </section>
+      <div>
+        <img
+          src="{{ url_for('static', filename='img/pexels-vatius-127028.jpg') }}"
+          alt="Katzenbild 3"
+          class="bilder"
+        />
+      </div>
     </main>
   </body>
   <footer>
