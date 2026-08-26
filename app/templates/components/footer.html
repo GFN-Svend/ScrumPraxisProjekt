@@ -1,10 +1,34 @@
 <footer class="site-footer">
-  <nav aria-label="Rechtliche Informationen">
-    <ul>
-      <li><a href="{{ url_for('main.impressum') }}">Impressum</a></li>
-      <li>
-        <a href="{{ url_for('main.datenschutz') }}">Datenschutzrichtlinien</a>
-      </li>
-    </ul>
-  </nav>
+  <div class="footer-inner">
+    <a
+      class="easter-egg-link"
+      href="{{ url_for('main.tic_tac_toe') }}"
+      aria-label="Minka nicht streicheln"
+      aria-describedby="minka-warning"
+      data-cat-calm="{{ url_for('static', filename='img/minka-calm.webp') }}"
+      data-cat-annoyed="{{ url_for('static', filename='img/minka-annoyed.webp') }}"
+      data-cat-angry="{{ url_for('static', filename='img/minka-angry.webp') }}"
+      data-cat-furious="{{ url_for('static', filename='img/minka-furious.webp') }}"
+    >
+      <img
+        class="cat-head"
+        src="{{ url_for('static', filename='img/minka-calm.webp') }}"
+        alt="Minkas Katzenkopf mit misstrauischem Blick"
+        width="128"
+        height="128"
+      />
+      <span class="easter-warning" id="minka-warning">
+        <strong>Nicht streicheln</strong>
+        <small class="easter-message" aria-live="polite">Minka beobachtet dich.</small>
+      </span>
+    </a>
+    <nav aria-label="Rechtliche Informationen">
+      <ul>
+        <li><a href="{{ url_for('main.impressum') }}">Impressum</a></li>
+        <li>
+          <a href="{{ url_for('main.datenschutz') }}">Datenschutzrichtlinien</a>
+        </li>
+      </ul>
+    </nav>
+  </div>
 </footer>
