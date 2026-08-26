@@ -194,6 +194,52 @@ class ApplicationTest(unittest.TestCase):
                 self.assertIn('lang="de"', page)
                 self.assertIn('href="/"', page)
 
+    def test_easter_egg_is_linked_from_the_portal(self) -> None:
+        page = self.client.get("/").get_data(as_text=True)
+
+        self.assertIn('href="/katzenklo"', page)
+        self.assertIn("Nicht streicheln", page)
+        self.assertIn("/static/footer_easter_egg.js", page)
+        for filename in (
+            "minka-calm.webp",
+            "minka-annoyed.webp",
+            "minka-angry.webp",
+            "minka-furious.webp",
+        ):
+            self.assertIn(f"/static/img/{filename}", page)
+            with self.client.get(f"/static/img/{filename}") as response:
+                self.assertEqual(response.status_code, 200)
+
+    def test_pic_pac_paw_page_is_available(self) -> None:
+        response = self.client.get("/katzenklo")
+        page = response.get_data(as_text=True)
+
+        self.assertEqual(response.status_code, 200)
+        self.assertIn("Pic Pac Paw", page)
+        self.assertIn(
+            "Da du Minka gestreichelt hast, fordert sie dich zu einem Pic Pac Paw Duell heraus.",
+            page,
+        )
+        self.assertEqual(page.count('data-cell="'), 9)
+        self.assertIn('/static/tic_tac_toe.js', page)
+        self.assertIn('/static/img/paw-light.png', page)
+        self.assertIn('/static/img/paw-dark.png', page)
+        for emote in ("neutral", "angry", "laughing", "defeated"):
+            asset_path = f"/static/img/minka-game-{emote}.webp"
+            self.assertIn(asset_path, page)
+            with self.client.get(asset_path) as emote_response:
+                self.assertEqual(emote_response.status_code, 200)
+        self.assertIn('href="/"', page)
+
+        for asset_path in (
+            "/static/img/paw-light.png",
+            "/static/img/paw-dark.png",
+            "/static/tic_tac_toe.js",
+        ):
+            with self.subTest(asset_path=asset_path):
+                with self.client.get(asset_path) as asset_response:
+                    self.assertEqual(asset_response.status_code, 200)
+
     def test_static_assets_referenced_on_index_are_available(self) -> None:
         index_response = self.client.get("/")
         asset_paths = set(
