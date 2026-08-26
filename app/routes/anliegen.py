@@ -2,7 +2,6 @@ from flask import Blueprint, jsonify, request, url_for
 
 from ..database.flask import get_database
 
-
 blueprint = Blueprint("anliegen", __name__, url_prefix="/api/anliegen")
 REQUIRED_FIELDS = ("titel", "beschreibung", "kategorie", "ort")
 
