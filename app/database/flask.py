@@ -39,3 +39,7 @@ def init_database(app: Flask) -> None:
     with app.app_context():
         database = get_database()
         database.execute_script(schema_path.read_text(encoding="utf-8"))
+
+        if app.config.get("SEED_DATABASE"):
+            seed_path = Path(__file__).with_name("seed.sql")
+            database.execute_script(seed_path.read_text(encoding="utf-8"))

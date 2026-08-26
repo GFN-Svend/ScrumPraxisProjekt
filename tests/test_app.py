@@ -41,6 +41,143 @@ class ApplicationTest(unittest.TestCase):
         self.assertIn('href="/impressum"', page)
         self.assertIn('href="/datenschutz"', page)
 
+    def test_index_shows_empty_news_state(self) -> None:
+        response = self.client.get("/")
+
+        self.assertIn(
+            "Aktuell liegen keine Meldungen vor.", response.get_data(as_text=True)
+        )
+
+    def test_index_shows_three_newest_anliegen_with_details(self) -> None:
+        entries = [
+            ("Älteste Katze", "2026-08-20 10:00:00"),
+            ("Drittneueste Katze", "2026-08-21 10:00:00"),
+            ("Zweitneueste Katze", "2026-08-22 10:00:00"),
+            ("Neueste Katze", "2026-08-23 10:00:00"),
+        ]
+        with SQLiteDatabase(self.database_path) as database:
+            with database.transaction():
+                for title, date in entries:
+                    database.execute(
+                        """
+                        INSERT INTO anliegen
+                            (titel, beschreibung, kategorie, ort, datum)
+                        VALUES (?, ?, ?, ?, ?)
+                        """,
+                        (title, "Katzenbeschreibung", "Katzennews", "Musterstadt", date),
+                    )
+
+        page = self.client.get("/").get_data(as_text=True)
+
+        self.assertNotIn("Älteste Katze", page)
+        self.assertLess(page.index("Neueste Katze"), page.index("Zweitneueste Katze"))
+        self.assertLess(
+            page.index("Zweitneueste Katze"), page.index("Drittneueste Katze")
+        )
+        self.assertIn("Katzenbeschreibung", page)
+        self.assertIn("Katzennews", page)
+        self.assertIn("Musterstadt", page)
+        self.assertIn("23.08.2026", page)
+        self.assertIn('href="/aktuelles"', page)
+
+    def test_aktuelles_shows_all_anliegen_newest_first(self) -> None:
+        entries = [
+            ("Älteste Meldung", "2026-08-20 10:00:00"),
+            ("Neueste Meldung", "2026-08-23 10:00:00"),
+            ("Mittlere Meldung", "2026-08-22 10:00:00"),
+        ]
+        with SQLiteDatabase(self.database_path) as database:
+            with database.transaction():
+                for title, date in entries:
+                    database.execute(
+                        """
+                        INSERT INTO anliegen
+                            (titel, beschreibung, kategorie, ort, datum)
+                        VALUES (?, ?, ?, ?, ?)
+                        """,
+                        (title, "Beschreibung", "Kategorie", "Musterstadt", date),
+                    )
+
+        response = self.client.get("/aktuelles")
+        page = response.get_data(as_text=True)
+
+        self.assertEqual(response.status_code, 200)
+        self.assertIn("Älteste Meldung", page)
+        self.assertLess(page.index("Neueste Meldung"), page.index("Mittlere Meldung"))
+        self.assertLess(page.index("Mittlere Meldung"), page.index("Älteste Meldung"))
+
+    def test_aktuelles_shows_empty_state(self) -> None:
+        response = self.client.get("/aktuelles")
+
+        self.assertEqual(response.status_code, 200)
+        self.assertIn(
+            "Aktuell liegen keine Meldungen vor.", response.get_data(as_text=True)
+        )
+
+    def test_seed_data_is_loaded_idempotently_and_restores_missing_entries(self) -> None:
+        seeded_database_path = Path(self.temporary_directory.name) / "seeded.sqlite3"
+        config = {
+            "TESTING": True,
+            "DATABASE_PATH": seeded_database_path,
+            "SEED_DATABASE": True,
+        }
+
+        create_app(config)
+
+        with SQLiteDatabase(seeded_database_path) as database:
+            database.execute(
+                "DELETE FROM anliegen WHERE titel = ?",
+                ("Betrunkene Katze fährt in ein KFC",),
+            )
+            database.commit()
+
+        create_app(config)
+
+        with SQLiteDatabase(seeded_database_path) as database:
+            count = database.execute("SELECT COUNT(*) FROM anliegen").fetchone()[0]
+            missing_image_count = database.execute(
+                "SELECT COUNT(*) FROM anliegen WHERE foto_pfad IS NULL"
+            ).fetchone()[0]
+            image_paths = database.execute(
+                """
+                SELECT titel, foto_pfad
+                FROM anliegen
+                WHERE foto_pfad IS NOT NULL
+                ORDER BY datum, id
+                """
+            ).fetchall()
+
+        self.assertEqual(count, 66)
+        self.assertEqual(missing_image_count, 0)
+        self.assertEqual(
+            [row[1] for row in image_paths[:6]],
+            [
+                "img/news/01-kfc-unfall.png",
+                "img/news/02-katzenminze-ermittlung.png",
+                "img/news/03-katzenschalter.png",
+                "img/news/04-karlo-entschuldigung.png",
+                "img/news/05-kfc-wiedereroeffnung.png",
+                "img/news/06-minka-vermisst.png",
+            ],
+        )
+        self.assertEqual(len(image_paths), 66)
+        paths_by_title = {row[0]: row[1] for row in image_paths}
+        expected_codex_images = {
+            "Pfotenabdrücke führen zum alten Glockenturm": "codex-clipboard-78030a55-1409-49dd-97a3-b78b9ba2a12c.png",
+            "Feuerwehr rettet Minka aus dem Glockenturm": "codex-clipboard-924843c7-ec03-4588-b9bc-fa389a320967.png",
+            "Minka dankt ihren Retterkatzen mit Rathausfest": "codex-clipboard-6324df55-0983-436b-8ec9-09f06c502d9f.png",
+            "Kätzchen entdeckt geheimen Tunnel unter dem Marktplatz": "codex-clipboard-a8e23707-52d0-417c-beb5-73bd05e411d7.png",
+            "Katzenarchäologen untersuchen Marktplatztunnel": "codex-clipboard-ac82dcb2-d42f-4730-b030-b90e8124c24e.png",
+            "Tunnel war historische Katzenpost-Route": "codex-clipboard-94478d2f-d0fc-4aea-8430-82b726283ed0.png",
+            "Historischer Katzentunnel wird sonntags geöffnet": "codex-clipboard-08f2ced3-7424-4549-a6ac-0333245d9caf.png",
+            "Seltenes Katzenkochbuch aus Bibliothek verschwunden": "codex-clipboard-0cbb3681-c956-4d8e-a081-cb54bcb666d3.png",
+            "Bibliothekskater Goethe entdeckt verdächtige Krümelspur": "codex-clipboard-7f4b0fd2-d8a5-41c0-b70a-cd0c4e6badf7.png",
+            "Katzenkochbuch hinter Sitzkissen wiedergefunden": "codex-clipboard-2c69eb82-9365-4647-a8af-e141455d052f.png",
+            "Kater meldet verdächtig leeren Futternapf": "codex-clipboard-111e8683-1e99-494b-937d-4b8837082db3.png",
+        }
+        for title, filename in expected_codex_images.items():
+            self.assertEqual(paths_by_title[title], f"img/news/{filename}")
+
     def test_legal_pages_are_available(self) -> None:
         pages = {
             "/impressum": "<h1>Impressum</h1>",
