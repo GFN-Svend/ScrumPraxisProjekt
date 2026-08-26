@@ -1,28 +1,20 @@
-<!doctype html>
-<html lang="de">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Impressum</title>
-  </head>
-  <body>
-    <header>
-      <h1>Impressum</h1>
-    </header>
+{% extends "base.html" %}
 
-    <main>
-      <section>
-        <h3>Angaben gemäß § 5 TMG</h3>
-        <p>Musterstadt Bürgerportal</p>
-        <p>Musterstraße 123<br />12345 Musterstadt</p>
+{% block title %}Impressum{% endblock %}
+{% block page_class %}legal-page{% endblock %}
 
-        <h4>Kontakt</h4>
-        <p>Telefon: 01234 / 56789<br />E-Mail: info@buergerportal.de</p>
-      </section>
+{% block content %}
+  <section>
+    <h1>Impressum</h1>
+    <h3>Angaben gemäß § 5 TMG</h3>
+    <p>Musterstadt Bürgerportal</p>
+    <p>Musterstraße 123<br />12345 Musterstadt</p>
 
-      <p>
-        <a href="{{ url_for('main.index') }}">← Zurück zur Hauptseite</a>
-      </p>
-    </main>
-  </body>
-</html>
+    <h4>Kontakt</h4>
+    <p>Telefon: 01234 / 56789<br />E-Mail: info@buergerportal.de</p>
+  </section>
+
+  <p class="back-link">
+    <a href="{{ url_for('main.index') }}">← Zurück zur Hauptseite</a>
+  </p>
+{% endblock %}
