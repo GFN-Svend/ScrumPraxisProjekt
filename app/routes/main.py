@@ -40,6 +40,11 @@ def datenschutz():
     return render_template("datenschutz.html")
 
 
+@blueprint.get("/katzenklo")
+def tic_tac_toe():
+    return render_template("tic_tac_toe.html")
+
+
 @blueprint.get("/health")
 def health():
     database = get_database()

@@ -18,6 +18,7 @@
 
     {% include "components/footer.html" %}
 
+    <script src="{{ url_for('static', filename='footer_easter_egg.js') }}" defer></script>
     <script>
       document.addEventListener("DOMContentLoaded", () => {
         const searchForm = document.querySelector(".search-form");
