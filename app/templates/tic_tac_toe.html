@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+{% block title %}Pic Pac Paw · Bürgerportal{% endblock %}
+{% block page_class %}game-page{% endblock %}
+{% block content %}
+<section class="game-card" aria-labelledby="game-title">
+  <div class="cat-ears" aria-hidden="true"><span></span><span></span></div>
+  <h1 id="game-title">Pic Pac Paw</h1>
+  <p class="game-intro">
+    Da du Minka gestreichelt hast, fordert sie dich zu einem Pic Pac Paw Duell heraus.
+  </p>
+
+  <div class="game-status" id="game-status" aria-live="polite">
+    Du bist am Zug.
+  </div>
+
+  <div class="game-stage">
+    <figure class="minka-opponent" data-mood="neutral">
+      <img
+        id="minka-emote"
+        src="{{ url_for('static', filename='img/minka-game-neutral.webp') }}"
+        data-neutral="{{ url_for('static', filename='img/minka-game-neutral.webp') }}"
+        data-angry="{{ url_for('static', filename='img/minka-game-angry.webp') }}"
+        data-laughing="{{ url_for('static', filename='img/minka-game-laughing.webp') }}"
+        data-defeated="{{ url_for('static', filename='img/minka-game-defeated.webp') }}"
+        alt="Minka wartet konzentriert hinter dem Spielfeld"
+        role="button"
+        tabindex="0"
+        aria-label="Minka nicht anfassen"
+      />
+      <figcaption class="minka-speech" id="minka-speech" aria-live="polite">
+        Minka ist bereit.
+      </figcaption>
+    </figure>
+
+    <div
+      class="tic-tac-toe-board"
+      role="grid"
+      aria-label="Pic-Pac-Paw-Spielfeld"
+      data-light-paw="{{ url_for('static', filename='img/paw-light.png') }}"
+      data-dark-paw="{{ url_for('static', filename='img/paw-dark.png') }}"
+    >
+      {% for index in range(9) %}
+        <button
+          class="game-cell"
+          type="button"
+          role="gridcell"
+          data-cell="{{ index }}"
+          aria-label="Feld {{ index + 1 }}, frei"
+        ></button>
+      {% endfor %}
+    </div>
+  </div>
+
+  <div class="game-actions">
+    <button class="game-reset" id="game-reset" type="button">Neue Runde</button>
+    <a class="game-back" href="{{ url_for('main.index') }}">Zurück zum Portal</a>
+  </div>
+</section>
+<script src="{{ url_for('static', filename='tic_tac_toe.js') }}" defer></script>
+{% endblock %}
