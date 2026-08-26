@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% from "components/news_card.html" import news_card %}
 {% block title %}Team 3 - Scrum Projekt{% endblock %}
 
 {% block content %}
@@ -31,20 +32,18 @@
   <section id="aktuelles">
     <h3>Aktuelles</h3>
     <p>Was gerade in deiner Stadt passiert</p>
-    <div class="news-grid">
-      <article class="news-card">
-        <img src="{{ url_for('static', filename='img/Bild (1).png') }}" alt="Muscheln 1" class="news-bilder" />
-        <div class="news-content"><h4>Neues Stadtmuseum eröffnet</h4><p>Das neue Stadtmuseum eröffnet am ... wo ????</p></div>
-      </article>
-      <article class="news-card">
-        <img src="{{ url_for('static', filename='img/Bild.png') }}" alt="Muscheln 2" />
-        <div class="news-content"><h4>Neues Straßenbahnnetzwerk wurde errichtet</h4><p>Eine komplett neue Straße ist einfach so aufgetaucht</p></div>
-      </article>
-      <article class="news-card">
-        <img src="{{ url_for('static', filename='img/Bild (2).png') }}" alt="Muscheln 3" class="news-bilder" />
-        <div class="news-content"><h4>Auto in Brand</h4><p>Ich habe mein Auto angezündet</p></div>
-      </article>
-    </div>
+    {% if aktuelle_meldungen %}
+      <div class="news-grid">
+        {% for meldung in aktuelle_meldungen %}
+          {{ news_card(meldung) }}
+        {% endfor %}
+      </div>
+      <p class="news-more">
+        <a class="button-link" href="{{ url_for('main.aktuelles') }}">Alle Meldungen ansehen</a>
+      </p>
+    {% else %}
+      <p class="news-empty">Aktuell liegen keine Meldungen vor.</p>
+    {% endif %}
   </section>
 
   <section id="kontakt" class="split-section">

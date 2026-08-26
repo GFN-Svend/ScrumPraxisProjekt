@@ -1,0 +1,24 @@
+{% macro news_card(meldung) %}
+  <article class="news-card">
+    {% if meldung.foto_pfad %}
+      <img
+        src="{{ url_for('static', filename=meldung.foto_pfad) }}"
+        alt="Illustration zur Meldung: {{ meldung.titel }}"
+        class="news-image"
+      />
+    {% else %}
+      <div class="news-image-placeholder" aria-hidden="true">🐾</div>
+    {% endif %}
+    <div class="news-content">
+      <div class="news-meta">
+        <span class="news-category">{{ meldung.kategorie }}</span>
+        <time datetime="{{ meldung.datum }}">
+          {{ meldung.datum[8:10] }}.{{ meldung.datum[5:7] }}.{{ meldung.datum[0:4] }}
+        </time>
+      </div>
+      <h4>{{ meldung.titel }}</h4>
+      <p>{{ meldung.beschreibung }}</p>
+      <p class="news-location"><span aria-hidden="true">⌖</span> {{ meldung.ort }}</p>
+    </div>
+  </article>
+{% endmacro %}

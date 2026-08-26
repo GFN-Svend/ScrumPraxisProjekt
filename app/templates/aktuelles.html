@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% from "components/news_card.html" import news_card %}
+{% block title %}Aktuelles – Bürgerportal{% endblock %}
+
+{% block content %}
+  <section class="news-page" aria-labelledby="aktuelles-heading">
+    <p class="eyebrow">Bürgerportal · Meldungen</p>
+    <h2 id="aktuelles-heading">Aktuelles</h2>
+    <p>Alle Meldungen aus deiner Stadt – die neuesten zuerst.</p>
+
+    {% if meldungen %}
+      <div class="news-grid">
+        {% for meldung in meldungen %}
+          {{ news_card(meldung) }}
+        {% endfor %}
+      </div>
+    {% else %}
+      <p class="news-empty">Aktuell liegen keine Meldungen vor.</p>
+    {% endif %}
+  </section>
+{% endblock %}
