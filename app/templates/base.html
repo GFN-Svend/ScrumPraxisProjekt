@@ -17,5 +17,43 @@
     </main>
 
     {% include "components/footer.html" %}
+
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const searchForm = document.querySelector(".search-form");
+        const searchInput = document.querySelector(".search-input");
+
+        const sectionMap = {
+          kontakt: "kontakt",
+          anliegen: "support",
+          support: "support",
+          öffnungzeiten: "anfahrt",
+          anfahrt: "anfahrt",
+          home: "home",
+        };
+
+        function checkAndScroll(query) {
+          const cleanedQuery = query.trim().toLowerCase();
+          const targetId = sectionMap[cleanedQuery];
+          if (targetId) {
+            const targetElement = document.getElementById(targetId);
+            if (targetElement) {
+              targetElement.scrollIntoView({ behavior: "smooth" });
+              return true;
+            }
+          }
+          return false;
+        }
+
+        if (searchForm && searchInput) {
+          searchForm.addEventListener("submit", (e) => {
+            const query = searchInput.value;
+            if (checkAndScroll(query)) {
+              e.preventDefault();
+            }
+          });
+        }
+      });
+    </script>
   </body>
 </html>
