@@ -45,3 +45,4 @@ def health():
     database = get_database()
     database.execute("SELECT 1").fetchone()
     return {"status": "ok", "database": "connected"}
+
