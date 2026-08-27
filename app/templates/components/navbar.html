@@ -4,15 +4,38 @@
     <nav class="site-navigation" aria-label="Hauptnavigation">
       <ul>
         <li><a href="{{ url_for('main.index') }}#home">Home</a></li>
-        <li><a href="{{ url_for('main.aktuelles') }}">Aktuelles</a></li>
+
         <li>
-          <a href="{{ url_for('main.index') }}#support">Anliegen melden</a>
-        </li>
-        <li><a href="{{ url_for('main.index') }}#kontakt">Kontakt</a></li>
-        <li>
-          <a href="{{ url_for('main.index') }}#anfahrt"
-            >Öffnungszeiten & Anfahrt</a
+          <a
+            href="{{ url_for('main.aktuelles') }}"
+            class="nav-link {% if request.endpoint == 'main.aktuelles' %}active{% endif %}"
           >
+            Aktuelles
+          </a>
+        </li>
+        <li>
+          <a
+            href="{{ url_for('main.index', _anchor='support') }}"
+            class="nav-link"
+          >
+            Anliegen melden
+          </a>
+        </li>
+        <li>
+          <a
+            href="{{ url_for('main.index', _anchor='kontakt') }}"
+            class="nav-link"
+          >
+            Kontakt
+          </a>
+        </li>
+        <li>
+          <a
+            href="{{ url_for('main.index', _anchor='anfahrt') }}"
+            class="nav-link"
+          >
+            Öffnungszeiten & Anfahrt
+          </a>
         </li>
       </ul>
       <form
