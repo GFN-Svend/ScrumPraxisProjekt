@@ -10,7 +10,6 @@ COUNTER_FILE = "counter.json"
 
 
 def get_counter():
-    """Liest den aktuellen Zählerstand aus."""
     if os.path.exists(COUNTER_FILE):
         try:
             with open(COUNTER_FILE, "r") as f:
@@ -22,7 +21,6 @@ def get_counter():
 
 
 def increment_counter():
-    """Erhöht den Zähler um 1 und speichert ihn."""
     count = get_counter() + 1
     with open(COUNTER_FILE, "w") as f:
         json.dump({"views": count}, f)
@@ -32,7 +30,7 @@ def increment_counter():
 @blueprint.get("/")
 def index():
     aktuelle_meldungen = get_database().execute(
-        """
+         """
         SELECT id, titel, beschreibung, kategorie, ort, foto_pfad, datum, status
         FROM anliegen
         ORDER BY datum DESC, id DESC
@@ -45,7 +43,7 @@ def index():
 @blueprint.get("/aktuelles")
 def aktuelles():
     meldungen = get_database().execute(
-        """
+         """
         SELECT id, titel, beschreibung, kategorie, ort, foto_pfad, datum, status
         FROM anliegen
         ORDER BY datum DESC, id DESC
@@ -78,10 +76,8 @@ def health():
 
 @blueprint.app_template_global()
 def total_views():
-    # Prüft, ob der Besucher in dieser Browser-Sitzung schon gezählt wurde
     if not session.get("has_visited"):
         session["has_visited"] = True
         return increment_counter()
 
-    # Bereits gezählt -> nur den alten Stand anzeigen
     return get_counter()
