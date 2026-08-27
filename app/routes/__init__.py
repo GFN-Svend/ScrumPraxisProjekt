@@ -8,3 +8,4 @@ def register_routes(app: Flask) -> None:
     """Registriert alle HTTP-Routen der Anwendung an einer Stelle."""
     app.register_blueprint(main_blueprint)
     app.register_blueprint(anliegen_blueprint)
+    app.secret_key = "super-geheim"
